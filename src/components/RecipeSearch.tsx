@@ -55,24 +55,29 @@ export const RecipeSearch = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4">
+    <div className="w-full max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 min-h-[calc(100vh-8rem)] items-center">
+      {/* Left Side: Search & Control */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
         className="space-y-6"
       >
-        {/* Search Section */}
+        <div className="space-y-4">
+          <h1 className="text-5xl font-bold tracking-tighter text-primary">Chef Gemini</h1>
+          <p className="text-muted-foreground text-xl">Your AI-powered culinary assistant. Discover any recipe in seconds.</p>
+        </div>
+        
         <div className="space-y-4">
           <div className="relative">
             <Input
               type="text"
-              placeholder="Search for any recipe..."
+              placeholder="e.g., 'Vegan pasta with pesto'..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={handleKeyPress}
               disabled={isLoading}
-              className="h-16 text-lg px-6 pr-14 rounded-2xl shadow-lg border-2 border-primary/20 focus:border-primary transition-all"
+              className="h-16 text-lg px-6 pr-14 rounded-2xl shadow-lg border-2 border-primary/20 focus:border-primary transition-all bg-card"
             />
             <Search className="absolute right-5 top-1/2 -translate-y-1/2 text-muted-foreground w-6 h-6" />
           </div>
@@ -86,40 +91,42 @@ export const RecipeSearch = () => {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Searching Recipes...
+                Searching...
               </>
             ) : (
               <>
                 <ChefHat className="mr-2 h-5 w-5" />
-                Search Recipe
+                Find Recipe
               </>
             )}
           </Button>
         </div>
+      </motion.div>
 
-        {/* Results Section */}
+      {/* Right Side: Results */}
+      <div className="h-full">
         <AnimatePresence mode="wait">
-          {recipeResult && (
+          {recipeResult ? (
             <motion.div
               key="result"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.5 }}
+              className="h-full"
             >
-              <Card className="p-8 rounded-2xl shadow-2xl glass-card">
+              <Card className="p-8 rounded-3xl shadow-2xl glass-card h-full overflow-y-auto">
                 <div className="prose prose-lg max-w-none">
                   <div className="whitespace-pre-wrap text-foreground">
                     {recipeResult.split('\n').map((line, index) => {
-                      // Check if line is a section header (starts with emoji)
                       if (line.match(/^[🍽️🔥⚖️💡]/)) {
                         return (
-                          <h2 key={index} className="text-2xl font-bold mt-6 mb-4 text-primary flex items-center gap-2">
+                          <h2 key={index} className="text-2xl font-bold mt-6 mb-4 text-primary flex items-center gap-3">
                             {line}
                           </h2>
                         );
                       }
-                      return line ? <p key={index} className="mb-2">{line}</p> : <br key={index} />;
+                      return line ? <p key={index} className="mb-2 leading-relaxed">{line}</p> : <br key={index} />;
                     })}
                   </div>
                 </div>
@@ -130,13 +137,30 @@ export const RecipeSearch = () => {
                   size="lg"
                   className="mt-8 w-full h-12 rounded-xl border-2 hover:bg-primary hover:text-primary-foreground transition-all"
                 >
-                  Try Another Recipe
+                  Search Another Recipe
                 </Button>
+              </Card>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="placeholder"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5 }}
+              className="h-full"
+            >
+              <Card className="p-8 rounded-3xl shadow-2xl glass-card h-full flex flex-col items-center justify-center text-center bg-cover bg-center" style={{backgroundImage: "url('/src/assets/hero-food-bg.jpg')"}}>
+                <div className="bg-black/50 p-8 rounded-2xl">
+                  <ChefHat className="w-24 h-24 text-primary-foreground mx-auto mb-6" />
+                  <h2 className="text-3xl font-bold text-primary-foreground">Your recipe awaits!</h2>
+                  <p className="text-primary-foreground/80 mt-2 text-lg">Use the search on the left to find your next delicious meal.</p>
+                </div>
               </Card>
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </div>
   );
 };

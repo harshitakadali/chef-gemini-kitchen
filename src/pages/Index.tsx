@@ -26,8 +26,8 @@ const Index = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 px-4"
         >
-          <h1 className="text-5xl md:text-7xl font-heading font-extrabold mb-4 gradient-accent bg-clip-text text-transparent">
-            Recipe Finder AI
+          <h1 className="text-5xl md:text-7xl font-heading font-extrabold mb-4 ">
+            Recipe Recommendation AI
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
             Discover delicious recipes with AI-powered recommendations

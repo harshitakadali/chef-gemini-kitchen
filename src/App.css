@@ -1,42 +1,58 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --font-family-sans: 'Poppins', sans-serif;
+  
+  --color-primary: #f97316; /* Orange 500 */
+  --color-primary-foreground: #ffffff;
+  
+  --color-background: #111827; /* Gray 900 */
+  --color-foreground: #f9fafb; /* Gray 50 */
+  
+  --color-card: #1f2937; /* Gray 800 */
+  --color-card-foreground: #f9fafb;
+  
+  --color-muted: #4b5563; /* Gray 600 */
+  --color-muted-foreground: #9ca3af; /* Gray 400 */
+  
+  --color-accent: #34d399; /* Emerald 400 */
+  --color-accent-foreground: #111827;
+
+  --radius: 0.75rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.gradient-accent {
+  background-image: linear-gradient(to right, var(--color-primary), var(--color-accent));
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.glass-card {
+  background-color: rgba(31, 41, 55, 0.6); /* card with opacity */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.prose {
+  --tw-prose-body: var(--color-foreground);
+  --tw-prose-headings: var(--color-primary);
+  --tw-prose-lead: var(--color-muted-foreground);
+  --tw-prose-links: var(--color-primary);
+  --tw-prose-bold: var(--color-foreground);
+  --tw-prose-counters: var(--color-muted-foreground);
+  --tw-prose-bullets: var(--color-muted);
+  --tw-prose-hr: var(--color-muted);
+  --tw-prose-quotes: var(--color-foreground);
+  --tw-prose-quote-borders: var(--color-primary);
+  --tw-prose-captions: var(--color-muted-foreground);
+  --tw-prose-code: var(--color-accent);
+  --tw-prose-pre-code: var(--color-accent-foreground);
+  --tw-prose-pre-bg: var(--color-accent);
+  --tw-prose-th-borders: var(--color-muted);
+  --tw-prose-td-borders: var(--color-muted);
 }
